@@ -14,8 +14,6 @@ import org.spongepowered.api.data.type.DyeColors;
 import org.spongepowered.api.effect.sound.SoundTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
 import org.spongepowered.api.item.ItemTypes;
@@ -33,7 +31,7 @@ import org.spongepowered.api.text.format.TextStyles;
 public class GuiCommand implements CommandExecutor {
 	private Object plugins;
 	Inventory invs = Inventory.builder().of(InventoryArchetypes.CHEST)
-			.property(InventoryDimension.PROPERTY_NAM, new InventoryDimension(9, 4))
+			.property(InventoryDimension.PROPERTY_NAME, new InventoryDimension(9, 4))
 			.property(InventoryTitle.PROPERTY_NAME,
 					InventoryTitle.of(Text.builder("CrazyFeet").color(TextColors.DARK_RED).style(TextStyles.BOLD).build()))
 			.build(this.plugins);
@@ -44,7 +42,7 @@ public class GuiCommand implements CommandExecutor {
 			//event.setCancelled(true);
 			Transaction<ItemStackSnapshot> clickTransaction = event.getTransactions().get(0);
 			ItemStack item = clickTransaction.getOriginal().createStack();
-			if (item.getItem().equals(ItemTypes.FIRE_CHARGE)) {
+			if (item.getType().equals(ItemTypes.FIRE_CHARGE)) {
          	    //use this way so like that if they have permission to command or not.
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				//1 tick delay may prevent "Phase Switch Error" from Sponge.
@@ -52,85 +50,85 @@ public class GuiCommand implements CommandExecutor {
 						execute(() -> Sponge.getCommandManager().process(player, "crazyfire")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.REDSTONE_BLOCK)) {
+			if (item.getType().equals(ItemTypes.REDSTONE_BLOCK)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazyheart")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.NOTEBLOCK)) {
+			if (item.getType().equals(ItemTypes.NOTEBLOCK)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazynote")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.EMERALD)) {
+			if (item.getType().equals(ItemTypes.EMERALD)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazymagic")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.NETHER_STAR)) {
+			if (item.getType().equals(ItemTypes.NETHER_STAR)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazywitch")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.ENDER_PEARL)) {
+			if (item.getType().equals(ItemTypes.ENDER_PEARL)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazypearl")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.COAL_BLOCK)) {
+			if (item.getType().equals(ItemTypes.COAL_BLOCK)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazysmoke")).
 						submit(CrazyFeet.getInstance());
 			}
 			//Head Particle here
-			if (item.getItem().equals(ItemTypes.FLINT_AND_STEEL)) {
+			if (item.getType().equals(ItemTypes.FLINT_AND_STEEL)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazyfirehead")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.REDSTONE)) {
+			if (item.getType().equals(ItemTypes.REDSTONE)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazyhearthead")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.JUKEBOX)) {
+			if (item.getType().equals(ItemTypes.JUKEBOX)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazynotehead")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.EMERALD_BLOCK)) {
+			if (item.getType().equals(ItemTypes.EMERALD_BLOCK)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazymagichead")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.SOUL_SAND)) {
+			if (item.getType().equals(ItemTypes.SOUL_SAND)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazywitchhead")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.ENDER_EYE)) {
+			if (item.getType().equals(ItemTypes.ENDER_EYE)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazypearlhead")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.TNT)) {
+			if (item.getType().equals(ItemTypes.TNT)) {
 				player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazysmoke")).
 						submit(CrazyFeet.getInstance());
 			}
-			if (item.getItem().equals(ItemTypes.BARRIER)) {
+			if (item.getType().equals(ItemTypes.BARRIER)) {
 				player.playSound(SoundTypes.BLOCK_ANVIL_PLACE, player.getLocation().getPosition(), 1);
 				Sponge.getScheduler().createTaskBuilder().delayTicks(1).
 						execute(() -> Sponge.getCommandManager().process(player, "crazydisable")).
@@ -183,7 +181,7 @@ public class GuiCommand implements CommandExecutor {
 		pearlH.offer(Keys.DISPLAY_NAME, Text.of(TextColors.RED, "CrazyPearlHead!"));
 		ItemStack cdisable = ItemStack.of(ItemTypes.BARRIER, 1);
 		cdisable.offer(Keys.DISPLAY_NAME, LanguageUtils.getText("removeAllParticles"));
-		player.openInventory(invs, Cause.of(NamedCause.of(player.getName(), player)));
+		player.openInventory(invs);
 		invs.query(new SlotPos(0, 0)).set(border);
 		invs.query(new SlotPos(1, 0)).set(border);
 		invs.query(new SlotPos(2, 0)).set(border);

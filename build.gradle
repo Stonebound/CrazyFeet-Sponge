@@ -1,16 +1,44 @@
-apply plugin: 'java'
+plugins {
+    id 'idea'
+    id 'java'
+    id 'ninja.miserable.blossom' version '1.0.1'
+}
+
+project.ext.versionno = '1.10.0'
+project.ext.spongeapiversion = 'API7.0'
+
+version = rootProject.versionno + "-" + rootProject.spongeapiversion
+defaultTasks 'build'
 
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     mavenCentral()
-        maven {
-        name 'Sponge maven repo'
+    maven {
+        name 'Sponge'
         url 'http://repo.spongepowered.org/maven'
+    }
 }
-}
+
 dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'org.spongepowered:spongeapi:7.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
-       compile "org.spongepowered:spongeapi:5.1.0-SNAPSHOT"
+}
+
+blossom {
+    def location = 'src/main/java/me/runescapejon/CrazyFeet/CrazyFeet.java'
+    replaceToken '@version@', project.version, location
+}
+
+jar {
+    manifest {
+        attributes  'Implementation-Title': project.name,
+                'Implementation-Version': version,
+                'SpongeAPI-Version': project.spongeapiversion,
+                'Git-Hash': getGitHash()
+    }
+}
+
+static String getGitHash() {
+    def process = 'git rev-parse --short HEAD'.execute()
+    process.waitFor()
+    return process.exitValue() ? 'unknown' : process.text.trim()
 }
